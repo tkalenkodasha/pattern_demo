@@ -1,0 +1,9 @@
+﻿SELECT 
+    ROUND(
+        (CAST(COUNT(DISTINCT room_id) AS FLOAT) / (SELECT COUNT(*) FROM rooms)) * 100, 
+        2
+    ) AS OccupancyRate
+FROM bookings
+WHERE 
+    check_in <= '2025-03-01'
+    AND (check_out IS NULL OR check_out >= '2025-03-01');
