@@ -109,7 +109,31 @@ private void guestLabel_Click(object sender, EventArgs e)
     this.Hide();
 }
 ```
-
+9. Перенаправление по ролям:
+```csharp
+private int _userRole;
+            public Main(int userRole)
+            {
+                InitializeComponent();
+                _userRole = userRole;
+                if (_userRole == 1) //админ
+                {
+                    adminToolStripMenuItem.Visible = true;
+                    servicesToolStripMenuItem.Visible = true;
+                    bookingServicesToolStripMenuItem.Visible = true;
+                    bookingsToolStripMenuItem.Visible = true;
+                    guestsToolStripMenuItem.Visible = true;
+                    shiftsToolStripMenuItem.Visible = true;
+                    employeesToolStripMenuItem.Visible = true;
+                }
+                else if (_userRole == 2)//менеджер
+                {
+                    servicesToolStripMenuItem.Visible = true;
+                    employeesToolStripMenuItem.Visible = true;
+                    shiftsToolStripMenuItem.Visible = true;
+                }
+            }
+```
 ### Советы для запоминания:
 1. **Порядок проверок**:
    - Пустые поля → Поиск пользователя → Статус блокировки → Дата последнего входа → Пароль → Успешная авторизация
@@ -212,11 +236,13 @@ private void НазваниеПунктаМеню_Click(object sender, EventArgs
 
 1. Инициализация и загрузка данных:
 ```csharp
-public AdminUserControl()
-{
-    InitializeComponent();
-    usersTableAdapter.Fill(dataSet1.users); // Загрузка данных при создании
-}
+ public UserControl1()
+        {
+            InitializeComponent();
+            usersTableAdapter.Fill(hotelDataSet.users);
+            rolesTableAdapter.Fill(hotelDataSet.roles);
+        }
+```
 2. Логика сохранения:
 
 ```csharp
@@ -249,6 +275,45 @@ private void button_save_Click(object sender, EventArgs e)
         MessageBox.Show("Ошибка, обратитесь к администратору");
     }
 }
+```
+или
+```csharp
+private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult res = MessageBox.Show("вы уверены, что хотите применить изменерия?", "предупреждение", MessageBoxButtons.OKCancel);
+                if (res == DialogResult.OK)
+                {
+                    usersBindingSource.EndEdit();
+                    int rows = usersTableAdapter.Update(hotelDataSet.users);
+                    MessageBox.Show($"Сохранено строк: {rows}", "оповещение");
+
+                }
+                else if (res == DialogResult.Cancel)
+                {
+                    usersTableAdapter.Fill(hotelDataSet.users);
+                    rolesTableAdapter.Fill(hotelDataSet.roles);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("что-то пошло не так" + ex.Message, "оповещение об ошибке", MessageBoxButtons.OKCancel);
+            }
+        }
+private void refreshToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                usersTableAdapter.Fill(hotelDataSet.users);
+                rolesTableAdapter.Fill(hotelDataSet.roles);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Ошибка при обновлении: " + ex.Message);
+            }
+            
+           
+        }
 ```
 ### Ключевые моменты для запоминания
 
