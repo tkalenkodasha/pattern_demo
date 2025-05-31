@@ -1,0 +1,97 @@
+﻿create table roles (
+    id int primary key identity(1,1),
+    role_name varchar(40)
+);
+
+create table users (
+    id int primary key identity(1,1),
+    login varchar(100),
+    password varchar(50),
+    role_id int,
+    block_status varchar(40),
+    enter_date date,
+    foreign key (role_id) references roles(id),
+    constraint unique_login unique (login)
+);
+
+create table gender (
+    id int primary key identity(1,1),
+    gender_name varchar(10)
+);
+
+create table guests (
+    id int primary key identity(1,1),
+    surname varchar(60),
+    name varchar(60),
+    pastname varchar(70),
+    phone varchar(15),
+    passport varchar(10),
+    gender_id int,
+    foreign key (gender_id) references gender(id)
+);
+
+create table staff (
+    id int primary key identity(1,1),
+    surname varchar(60),
+    name varchar(60),
+    pastname varchar(60),
+    position varchar(30)
+);
+
+create table rooms (
+    id int primary key identity(1,1),
+    floor varchar(50),
+    number nchar(10),
+    category varchar(150),
+    status varchar(50),
+    price_per_day int
+);
+
+create table bookings (
+    id int primary key identity(1,1),
+    guest_id int,
+    room_id int,
+    check_in date,
+    check_out date,
+    cost int,
+    status varchar(50),
+    foreign key (room_id) references rooms(id),
+    foreign key (guest_id) references guests(id)
+);
+
+
+
+create table cleaning_shedule (
+    id int primary key identity(1,1),
+    staff_id int,
+    room_id int,
+    status varchar(50),
+    foreign key (room_id) references rooms(id),
+    foreign key (staff_id) references staff(id)
+);
+
+create table services (
+    id int primary key identity(1,1),
+    name nvarchar(100),
+    price int,
+    category nvarchar(100)
+);
+
+create table booking_services (
+    id int primary key identity(1,1),
+    service_id int,
+    booking_id int,
+    count_services int,
+    cost int,
+    foreign key (service_id) references services(id),
+    foreign key (booking_id) references bookings(id)
+);
+
+create table payments (
+    id int primary key identity(1,1),
+    booking_id int,
+    amount int,
+    type varchar(50),
+    pay_date date,
+    foreign key (booking_id) references bookings(id)
+);

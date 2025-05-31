@@ -1,0 +1,228 @@
+﻿USE [HOTEL_EXAMEN]
+GO
+/****** Object:  Table [dbo].[booking_services]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[booking_services](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[service_id] [int] NULL,
+	[booking_id] [int] NULL,
+	[count_services] [int] NULL,
+	[cost] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[bookings]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[bookings](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[guest_id] [int] NULL,
+	[room_id] [int] NULL,
+	[check_in] [date] NULL,
+	[check_out] [date] NULL,
+	[cost] [int] NULL,
+	[status] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cleaning_shedule]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[cleaning_shedule](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[staff_id] [int] NULL,
+	[room_id] [int] NULL,
+	[status] [varchar](50) NULL,
+ CONSTRAINT [PK__cleaning__3213E83F255E5474] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[gender]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[gender](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[gender_name] [varchar](10) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[guests]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[guests](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[surname] [varchar](60) NULL,
+	[name] [varchar](60) NULL,
+	[pastname] [varchar](70) NULL,
+	[phone] [varchar](15) NULL,
+	[passport] [varchar](10) NULL,
+	[gender_id] [int] NULL,
+ CONSTRAINT [PK__guests__3213E83F826BFB88] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[payments]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[payments](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[booking_id] [int] NULL,
+	[amount] [int] NULL,
+	[type] [varchar](50) NULL,
+	[pay_date] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[roles]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[roles](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[role_name] [varchar](40) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[rooms]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[rooms](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[floor] [varchar](50) NULL,
+	[number] [nchar](10) NULL,
+	[category] [varchar](150) NULL,
+	[status] [varchar](50) NULL,
+	[price_per_day] [int] NULL,
+ CONSTRAINT [PK__rooms__3213E83FA5709293] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[services]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[services](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](100) NULL,
+	[price] [int] NULL,
+	[category] [nvarchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[staff]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[staff](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[surname] [varchar](60) NULL,
+	[name] [varchar](60) NULL,
+	[pastname] [varchar](60) NULL,
+	[position] [varchar](30) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[users]    Script Date: 31.05.2025 19:15:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[users](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[login] [varchar](100) NULL,
+	[password] [varchar](50) NULL,
+	[role_id] [int] NULL,
+	[block_status] [varchar](40) NULL,
+	[enter_date] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [unique_login] UNIQUE NONCLUSTERED 
+(
+	[login] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[booking_services]  WITH CHECK ADD FOREIGN KEY([booking_id])
+REFERENCES [dbo].[bookings] ([id])
+GO
+ALTER TABLE [dbo].[booking_services]  WITH CHECK ADD FOREIGN KEY([service_id])
+REFERENCES [dbo].[services] ([id])
+GO
+ALTER TABLE [dbo].[bookings]  WITH CHECK ADD  CONSTRAINT [FK__bookings__guest___48CFD27E] FOREIGN KEY([guest_id])
+REFERENCES [dbo].[guests] ([id])
+GO
+ALTER TABLE [dbo].[bookings] CHECK CONSTRAINT [FK__bookings__guest___48CFD27E]
+GO
+ALTER TABLE [dbo].[bookings]  WITH CHECK ADD  CONSTRAINT [FK__bookings__room_i__47DBAE45] FOREIGN KEY([room_id])
+REFERENCES [dbo].[rooms] ([id])
+GO
+ALTER TABLE [dbo].[bookings] CHECK CONSTRAINT [FK__bookings__room_i__47DBAE45]
+GO
+ALTER TABLE [dbo].[cleaning_shedule]  WITH CHECK ADD  CONSTRAINT [FK__cleaning___room___4E88ABD4] FOREIGN KEY([room_id])
+REFERENCES [dbo].[rooms] ([id])
+GO
+ALTER TABLE [dbo].[cleaning_shedule] CHECK CONSTRAINT [FK__cleaning___room___4E88ABD4]
+GO
+ALTER TABLE [dbo].[cleaning_shedule]  WITH CHECK ADD  CONSTRAINT [FK__cleaning___staff__4F7CD00D] FOREIGN KEY([staff_id])
+REFERENCES [dbo].[staff] ([id])
+GO
+ALTER TABLE [dbo].[cleaning_shedule] CHECK CONSTRAINT [FK__cleaning___staff__4F7CD00D]
+GO
+ALTER TABLE [dbo].[guests]  WITH CHECK ADD  CONSTRAINT [FK__guests__gender_i__3E52440B] FOREIGN KEY([gender_id])
+REFERENCES [dbo].[gender] ([id])
+GO
+ALTER TABLE [dbo].[guests] CHECK CONSTRAINT [FK__guests__gender_i__3E52440B]
+GO
+ALTER TABLE [dbo].[payments]  WITH CHECK ADD FOREIGN KEY([booking_id])
+REFERENCES [dbo].[bookings] ([id])
+GO
+ALTER TABLE [dbo].[users]  WITH CHECK ADD FOREIGN KEY([role_id])
+REFERENCES [dbo].[roles] ([id])
+GO
