@@ -17,111 +17,129 @@
 ## <a id="title1">Форма Auth</a>
 
 ### Гайд для запоминания кода (пошагово):
-1. Структура формы:
+1. **Структура формы**:
+   - 2 TextBox: `loginTextBox`, `passwordTextBox`
+   - 1 Button: `loginButton` с обработчиком `loginButton_Click`
+   - 1 Label: `guestLabel` для входа как гость с обработчиком `guestLabel_Click`
 
-- 2 TextBox: `textBox_login`, `textBox_password`
-
-- 1 Button: `button_auth` с обработчиком `button_auth_Click`
-
-2. Логика аутентификации:
+2. **Логика аутентификации**:
 ```csharp
 // Получаем данные из полей
-string login = textBox_login.Text;
-string password = textBox_password.Text;
+string login = loginTextBox.Text.Trim();
+string password = passwordTextBox.Text.Trim();
 
 // Проверка на пустые поля
-if (login == "" || password == "")
+if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
 {
-    MessageBox.Show("Введите логин и пароль!");
+    MessageBox.Show("введите логин и пароль!", "ошибка входа");
     return;
 }
 ```
 
-3. Проверка пользователя:
+3. **Поиск пользователя**:
 ```csharp
 // Ищем пользователя в БД
-var users = new usersTableAdapter().GetData()
-    .FirstOrDefault(user => user.login == login);
+var user = usersTableAdapter.GetData().FirstOrDefault(u => u.login == login);
 
-if (users == null) // Если не найден
+if (user == null)
 {
-    MessageBox.Show("Пользователь не найден!");
+    MessageBox.Show("пользователь не найден!", "ошибка входа");
     return;
 }
 ```
 
-4. Проверка пароля и счетчик ошибок:
+4. **Проверка статуса блокировки**:
 ```csharp
-if (users.password != password)
+if (user.block_status == "block")
 {
-    error_counter++; // Увеличиваем счетчик
-    MessageBox.Show("Неверный пароль!");
-    
-    if (error_counter == 3) // Если 3 ошибки
+    MessageBox.Show("Ваша учетная запись заблокирована!", "ошибка входа");
+    return;
+}
+```
+
+5. **Проверка даты последнего входа**:
+```csharp
+if (!user.Isenter_dateNull())
+{
+    TimeSpan timeSinceLastLogin = DateTime.Now - user.enter_date;
+    if (timeSinceLastLogin.TotalDays > 30)
     {
-        MessageBox.Show("Слишком много попыток!");
-        this.Hide(); // Закрываем форму
+        MessageBox.Show("последний вход был более 30 дней назад, поэтому Ваша учетная запись заблокирована!", "ошибка входа");
+        user.block_status = "block";
+        usersTableAdapter.Update(user);
+        return;
+    }
+}
+```
+
+6. **Проверка пароля и счетчик ошибок**:
+```csharp
+if (user.password != password)
+{
+    error_counter++;
+    MessageBox.Show($"Неверный пароль! осталось попыток: {3 - error_counter}", "ошибка входа");
+    if (error_counter == 3)
+    {
+        MessageBox.Show("превышен лимит попыток входа! ваш учетная запись заблокирована! обратитесь к администратору системы", "ошибка входа");
+        user.block_status = "block";
+        usersTableAdapter.Update(user);
         return;
     }
     return;
 }
 ```
 
-5. Перенаправление по ролям:
+7. **Успешная авторизация**:
 ```csharp
-private int _userRole;
-            public Main(int userRole)
-            {
-                InitializeComponent();
-                _userRole = userRole;
-                if (_userRole == 1) //админ
-                {
-                    adminToolStripMenuItem.Visible = true;
-                    servicesToolStripMenuItem.Visible = true;
-                    bookingServicesToolStripMenuItem.Visible = true;
-                    bookingsToolStripMenuItem.Visible = true;
-                    guestsToolStripMenuItem.Visible = true;
-                    shiftsToolStripMenuItem.Visible = true;
-                    employeesToolStripMenuItem.Visible = true;
-                }
-                else if (_userRole == 2)//менеджер
-                {
-                    servicesToolStripMenuItem.Visible = true;
-                    employeesToolStripMenuItem.Visible = true;
-                    shiftsToolStripMenuItem.Visible = true;
-                }
-            }
+// Обновляем дату входа
+user.enter_date = DateTime.Now;
+usersTableAdapter.Update(user);
+
+// Перенаправление на главную форму с ролью
+new MainForm(user.role_id).Show();
+this.Hide();
+```
+
+8. **Вход как гость**:
+```csharp
+private void guestLabel_Click(object sender, EventArgs e)
+{
+    int guest = 4; // Роль гостя
+    new MainForm(guest).Show();
+    this.Hide();
+}
 ```
 
 ### Советы для запоминания:
-1. Запомните порядок проверок:
-
-Пустые поля → Поиск пользователя → Проверка пароля → Проверка роли
-
-2. Запомните ключевые методы:
-
-- `FirstOrDefault()` для поиска пользователя
-
-- `Hide()/Show()` для переключения форм
-
-- `error_counter` для подсчета ошибок
-
-3. Обратите внимание на:
-
-- `usersTableAdapter` - это сгенерированный код для работы с БД
-
-- `DataSet1` - название вашего DataSet
+1. **Порядок проверок**:
+   - Пустые поля → Поиск пользователя → Статус блокировки → Дата последнего входа → Пароль → Успешная авторизация
+2. **Ключевые методы**:
+   - `FirstOrDefault()` для поиска пользователя
+   - `Isenter_dateNull()` для проверки `NULL` в `enter_date`
+   - `usersTableAdapter.Update()` для сохранения изменений в базе данных
+   - `Hide()/Show()` для переключения форм
+   - `error_counter` для подсчета ошибок
+3. **Обратите внимание**:
+   - `usersTableAdapter` — сгенерированный код для работы с таблицей `users`
+   - `hotelDataSet` — название вашего DataSet
+   - Столбец `login` имеет уникальное ограничение (`UNIQUE`) в базе данных
+   - Значение `block_status` равно `"block"` при блокировке
 
 ### Быстрый чек-лист для воспроизведения:
-1. Создать форму с 2 TextBox и 1 Button
-
-2. Добавить обработчик кнопки
-
-3. Реализовать 4 этапа проверки (по порядку из п.1 в советах для запоминания)
-
-4. Не забыть про счетчик ошибок
-
-5. Добавить переходы на другие формы
+1. Создать форму с:
+   - 2 TextBox (`loginTextBox`, `passwordTextBox`)
+   - 1 Button (`loginButton`)
+   - 1 Label (`guestLabel`)
+2. Добавить обработчик `loginButton_Click` с проверками:
+   - Пустые поля
+   - Существование пользователя
+   - Статус блокировки
+   - Дату последнего входа (более 30 дней)
+   - Пароль и счетчик ошибок
+3. Реализовать обновление `enter_date` и сохранение в базе данных
+4. Добавить переход на `MainForm` с передачей `role_id` или значения для гостя
+5. Добавить обработчик `guestLabel_Click` для входа как гость
+6. Не забыть сброс `error_counter` при необходимости (например, в `Auth_Load`)
 
 ## <a id="title2">Форма пользователя (н-р Admin)</a>
 
@@ -315,4 +333,4 @@ if (dataSet1.HasChanges())
 1. **Введение** (3 пункта: Название, Версия, Предметная область)  
 2. **Назначение** (1 предложение о цели + функции)  
 3. **Инструкция** (Запуск → 2-3 функции)  
-4. **Поддержка** (куда писать и что указать)  
+4. **Поддержка** (куда писать и что указать)
