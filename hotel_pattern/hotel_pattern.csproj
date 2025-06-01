@@ -149,7 +149,7 @@
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </None>
     <None Include="Patterns\manual_project.md" />
-    <None Include="Patterns\README - Копировать.md" />
+    <None Include="Patterns\help.md" />
     <None Include="Patterns\README.md" />
     <None Include="Patterns\рп отель.docx" />
     <None Include="Patterns\шаблон рп.docx" />
