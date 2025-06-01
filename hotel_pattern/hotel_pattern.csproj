@@ -58,10 +58,10 @@
     <Compile Include="Forms\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\HotelDataSet.cs">
+    <Compile Include="HotelDataSet.cs">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Data\HotelDataSet.Designer.cs">
+    <Compile Include="HotelDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
@@ -137,17 +137,19 @@
     <EmbeddedResource Include="UserControls\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Data\HotelDataSet.xsc">
+    <None Include="HotelDataSet.xsc">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Data\HotelDataSet.xsd">
+    <None Include="HotelDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>HotelDataSet.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Data\HotelDataSet.xss">
+    <None Include="HotelDataSet.xss">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Patterns\manual_project.md" />
+    <None Include="Patterns\README - Копировать.md" />
     <None Include="Patterns\README.md" />
     <None Include="Patterns\рп отель.docx" />
     <None Include="Patterns\шаблон рп.docx" />
@@ -168,6 +170,7 @@
     <Content Include="Patterns\script.txt" />
     <Content Include="Patterns\script_auto.txt" />
     <Content Include="Patterns\script_fond.txt" />
+    <None Include="Patterns\TextFile1.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

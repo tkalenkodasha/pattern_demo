@@ -13,19 +13,19 @@ namespace hotel_pattern.Forms
 {
     public partial class ChangePassword : Form
     {
-        private readonly HotelDataSet.usersRow _user;
-        private readonly usersTableAdapter _usersTableAdapter;
+      
+        private string login;
 
-        public ChangePassword(HotelDataSet.usersRow user)
+        public ChangePassword(string login)
         {
             InitializeComponent();
-            _user = user;
-            _usersTableAdapter = new usersTableAdapter();
-
+  
+            this.login = login;
         }
 
         private void changeButton_Click(object sender, EventArgs e)
         {
+            var user = usersTableAdapter.GetData().FirstOrDefault(u => u.login==login);
             string currentPassword = textBox1.Text.Trim();
             string newPassword = textBox2.Text.Trim();
             string newPassword2 = textBox3.Text.Trim();
@@ -34,7 +34,7 @@ namespace hotel_pattern.Forms
                 MessageBox.Show("Заполните все поля!", "ошибка");
                 return;
             }
-            if (currentPassword != _user.password) 
+            if (currentPassword != user.password) 
             {
                 MessageBox.Show("неверный текущий пароль!", "ошибка");
                 return;
@@ -44,11 +44,18 @@ namespace hotel_pattern.Forms
                 MessageBox.Show("новый пароль не совпадает с подтверждением!", "ошибка");
                 return;
             }
-            _user.password = newPassword2;
-            _usersTableAdapter.Update(_user);
+            user.password = newPassword2;
+            usersTableAdapter.Update(user);
             MessageBox.Show("пароль успешно изменен!", "оповещение");
             this.Hide();
 
+
+        }
+
+        private void ChangePassword_Load(object sender, EventArgs e)
+        {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "hotelDataSet.users". При необходимости она может быть перемещена или удалена.
+            this.usersTableAdapter.Fill(this.hotelDataSet.users);
 
         }
     }

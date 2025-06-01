@@ -116,8 +116,7 @@
             // 
             // usersBindingSource
             // 
-            this.usersBindingSource.DataMember = "users";
-            this.usersBindingSource.DataSource = this.hotelDataSet;
+          
             // 
             // hotelDataSet
             // 

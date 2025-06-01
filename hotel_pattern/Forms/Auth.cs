@@ -88,7 +88,7 @@ namespace hotel_pattern
             MessageBox.Show("вы успешно авторизовались!", "оповещение");
             if (user.password == "new_password")
             {
-                new ChangePassword(user).Show();
+                new ChangePassword(user.login).Show();
             }
             //при успешной попытке входа
             user.enter_date = DateTime.Now;
