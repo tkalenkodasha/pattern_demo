@@ -52,12 +52,6 @@
     <Compile Include="Forms\Auth.Designer.cs">
       <DependentUpon>Auth.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ChangePassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ChangePassword.Designer.cs">
-      <DependentUpon>ChangePassword.cs</DependentUpon>
-    </Compile>
     <Compile Include="HotelDataSet.cs">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </Compile>
@@ -119,9 +113,6 @@
     <EmbeddedResource Include="Forms\Auth.resx">
       <DependentUpon>Auth.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ChangePassword.resx">
-      <DependentUpon>ChangePassword.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,7 +158,6 @@
   <ItemGroup>
     <Content Include="Patterns\script.txt" />
     <Content Include="Patterns\script_auto.txt" />
-    <Content Include="Patterns\script_fond.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

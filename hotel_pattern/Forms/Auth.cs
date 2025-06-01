@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using hotel_pattern.HotelDataSetTableAdapters;
-using hotel_pattern.Forms;
 
 namespace hotel_pattern
 {
@@ -83,11 +82,6 @@ namespace hotel_pattern
                     return;
                 }
                 return;
-            }
-            MessageBox.Show("вы успешно авторизовались!", "оповещение");
-            if (user.password == "new_password")
-            {
-                new ChangePassword(user).Show();
             }
             //при успешной попытке входа
             user.enter_date = DateTime.Now;

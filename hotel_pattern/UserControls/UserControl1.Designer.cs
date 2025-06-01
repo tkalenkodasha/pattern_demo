@@ -32,15 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControl1));
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roleidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hotelDataSet = new hotel_pattern.HotelDataSet();
-            this.blockstatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.enterdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hotelDataSet = new hotel_pattern.HotelDataSet();
             this.usersTableAdapter = new hotel_pattern.HotelDataSetTableAdapters.usersTableAdapter();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -54,15 +47,22 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rolesTableAdapter = new hotel_pattern.HotelDataSetTableAdapters.rolesTableAdapter();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.rolesTableAdapter = new hotel_pattern.HotelDataSetTableAdapters.rolesTableAdapter();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roleidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.blockstatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.enterdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hotelDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -99,84 +99,15 @@
             this.dataGridView1.Size = new System.Drawing.Size(674, 256);
             this.dataGridView1.TabIndex = 1;
             // 
-            // idDataGridViewTextBoxColumn
+            // usersBindingSource
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 47;
-            // 
-            // password
-            // 
-            this.password.DataPropertyName = "password";
-            this.password.HeaderText = "password";
-            this.password.MinimumWidth = 6;
-            this.password.Name = "password";
-            this.password.ReadOnly = true;
-            this.password.Visible = false;
-            this.password.Width = 95;
-            // 
-            // loginDataGridViewTextBoxColumn
-            // 
-            this.loginDataGridViewTextBoxColumn.DataPropertyName = "login";
-            this.loginDataGridViewTextBoxColumn.HeaderText = "login";
-            this.loginDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.loginDataGridViewTextBoxColumn.Name = "loginDataGridViewTextBoxColumn";
-            this.loginDataGridViewTextBoxColumn.ReadOnly = true;
-            this.loginDataGridViewTextBoxColumn.Width = 65;
-            // 
-            // roleidDataGridViewTextBoxColumn
-            // 
-            this.roleidDataGridViewTextBoxColumn.DataPropertyName = "role_id";
-            this.roleidDataGridViewTextBoxColumn.DataSource = this.rolesBindingSource;
-            this.roleidDataGridViewTextBoxColumn.DisplayMember = "role_name";
-            this.roleidDataGridViewTextBoxColumn.HeaderText = "Роль";
-            this.roleidDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.roleidDataGridViewTextBoxColumn.Name = "roleidDataGridViewTextBoxColumn";
-            this.roleidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.roleidDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.roleidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.roleidDataGridViewTextBoxColumn.ValueMember = "id";
-            this.roleidDataGridViewTextBoxColumn.Width = 68;
-            // 
-            // rolesBindingSource
-            // 
-            this.rolesBindingSource.DataMember = "roles";
-            this.rolesBindingSource.DataSource = this.hotelDataSet;
+            this.usersBindingSource.DataMember = "users";
+            this.usersBindingSource.DataSource = this.hotelDataSet;
             // 
             // hotelDataSet
             // 
             this.hotelDataSet.DataSetName = "HotelDataSet";
             this.hotelDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // blockstatusDataGridViewTextBoxColumn
-            // 
-            this.blockstatusDataGridViewTextBoxColumn.DataPropertyName = "block_status";
-            this.blockstatusDataGridViewTextBoxColumn.HeaderText = "block_status";
-            this.blockstatusDataGridViewTextBoxColumn.Items.AddRange(new object[] {
-            "block",
-            "no block"});
-            this.blockstatusDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.blockstatusDataGridViewTextBoxColumn.Name = "blockstatusDataGridViewTextBoxColumn";
-            this.blockstatusDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.blockstatusDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.blockstatusDataGridViewTextBoxColumn.Width = 111;
-            // 
-            // enterdateDataGridViewTextBoxColumn
-            // 
-            this.enterdateDataGridViewTextBoxColumn.DataPropertyName = "enter_date";
-            this.enterdateDataGridViewTextBoxColumn.HeaderText = "enter_date";
-            this.enterdateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.enterdateDataGridViewTextBoxColumn.Name = "enterdateDataGridViewTextBoxColumn";
-            this.enterdateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.enterdateDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // usersBindingSource
-            // 
-            this.usersBindingSource.DataMember = "users";
-            this.usersBindingSource.DataSource = this.hotelDataSet;
             // 
             // usersTableAdapter
             // 
@@ -300,6 +231,15 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
+            // rolesBindingSource
+            // 
+            this.rolesBindingSource.DataMember = "roles";
+            this.rolesBindingSource.DataSource = this.hotelDataSet;
+            // 
+            // rolesTableAdapter
+            // 
+            this.rolesTableAdapter.ClearBeforeFill = true;
+            // 
             // saveToolStripButton
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -320,9 +260,68 @@
             this.refreshToolStripButton.Text = "обновить";
             this.refreshToolStripButton.Click += new System.EventHandler(this.refreshToolStripButton_Click);
             // 
-            // rolesTableAdapter
+            // idDataGridViewTextBoxColumn
             // 
-            this.rolesTableAdapter.ClearBeforeFill = true;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 47;
+            // 
+            // password
+            // 
+            this.password.DataPropertyName = "password";
+            this.password.HeaderText = "password";
+            this.password.MinimumWidth = 6;
+            this.password.Name = "password";
+            this.password.ReadOnly = true;
+            this.password.Visible = false;
+            this.password.Width = 95;
+            // 
+            // loginDataGridViewTextBoxColumn
+            // 
+            this.loginDataGridViewTextBoxColumn.DataPropertyName = "login";
+            this.loginDataGridViewTextBoxColumn.HeaderText = "login";
+            this.loginDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.loginDataGridViewTextBoxColumn.Name = "loginDataGridViewTextBoxColumn";
+            this.loginDataGridViewTextBoxColumn.ReadOnly = true;
+            this.loginDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // roleidDataGridViewTextBoxColumn
+            // 
+            this.roleidDataGridViewTextBoxColumn.DataPropertyName = "role_id";
+            this.roleidDataGridViewTextBoxColumn.DataSource = this.rolesBindingSource;
+            this.roleidDataGridViewTextBoxColumn.DisplayMember = "role_name";
+            this.roleidDataGridViewTextBoxColumn.HeaderText = "Роль";
+            this.roleidDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.roleidDataGridViewTextBoxColumn.Name = "roleidDataGridViewTextBoxColumn";
+            this.roleidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.roleidDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.roleidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.roleidDataGridViewTextBoxColumn.ValueMember = "id";
+            this.roleidDataGridViewTextBoxColumn.Width = 68;
+            // 
+            // blockstatusDataGridViewTextBoxColumn
+            // 
+            this.blockstatusDataGridViewTextBoxColumn.DataPropertyName = "block_status";
+            this.blockstatusDataGridViewTextBoxColumn.HeaderText = "block_status";
+            this.blockstatusDataGridViewTextBoxColumn.Items.AddRange(new object[] {
+            "block",
+            "no block"});
+            this.blockstatusDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.blockstatusDataGridViewTextBoxColumn.Name = "blockstatusDataGridViewTextBoxColumn";
+            this.blockstatusDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.blockstatusDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.blockstatusDataGridViewTextBoxColumn.Width = 111;
+            // 
+            // enterdateDataGridViewTextBoxColumn
+            // 
+            this.enterdateDataGridViewTextBoxColumn.DataPropertyName = "enter_date";
+            this.enterdateDataGridViewTextBoxColumn.HeaderText = "enter_date";
+            this.enterdateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.enterdateDataGridViewTextBoxColumn.Name = "enterdateDataGridViewTextBoxColumn";
+            this.enterdateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // UserControl1
             // 
@@ -336,12 +335,12 @@
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(1039, 609);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hotelDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
