@@ -46,8 +46,16 @@ namespace hotel_pattern.UserControls
 
         private void refreshToolStripButton_Click(object sender, EventArgs e)
         {
-            usersTableAdapter.Fill(hotelDataSet.users);
-            rolesTableAdapter.Fill(hotelDataSet.roles);
+            try
+            {
+                usersTableAdapter.Fill(hotelDataSet.users);
+                rolesTableAdapter.Fill(hotelDataSet.roles);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Ошибка при обновлении: " + ex.Message);
+            }
+            
+           
         }
     }
 }
