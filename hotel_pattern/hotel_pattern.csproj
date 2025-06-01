@@ -58,10 +58,10 @@
     <Compile Include="Forms\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="HotelDataSet.cs">
+    <Compile Include="Data\HotelDataSet.cs">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="HotelDataSet.Designer.cs">
+    <Compile Include="Data\HotelDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
@@ -137,18 +137,18 @@
     <EmbeddedResource Include="UserControls\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="HotelDataSet.xsc">
+    <None Include="Data\HotelDataSet.xsc">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </None>
-    <None Include="HotelDataSet.xsd">
+    <None Include="Data\HotelDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>HotelDataSet.Designer.cs</LastGenOutput>
     </None>
-    <None Include="HotelDataSet.xss">
+    <None Include="Data\HotelDataSet.xss">
       <DependentUpon>HotelDataSet.xsd</DependentUpon>
     </None>
-    <None Include="README.md" />
+    <None Include="Patterns\README.md" />
     <None Include="Patterns\рп отель.docx" />
     <None Include="Patterns\шаблон рп.docx" />
     <None Include="Properties\Settings.settings">

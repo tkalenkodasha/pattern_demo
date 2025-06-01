@@ -84,6 +84,7 @@ namespace hotel_pattern
                 }
                 return;
             }
+
             MessageBox.Show("вы успешно авторизовались!", "оповещение");
             if (user.password == "new_password")
             {
