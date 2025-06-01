@@ -10,9 +10,10 @@
 
 ## Оглавление:
 1. [Форма Auth](#title1)
-2. [Форма пользователя (н-р Admin)](#title2)
-3. [UserControl](#title3)
-4. [Руководство пользователя](#title4)
+2. [Форма ChangePassword](#title2)
+3. [Форма пользователя (н-р Admin)](#title3)
+4. [UserControl](#title4)
+5. [Руководство пользователя](#title5)
 
 ## <a id="title1">Форма Auth</a>
 
@@ -91,6 +92,13 @@ if (user.password != password)
 
 7. **Успешная авторизация**:
 ```csharp
+//при успешной попытке входа
+MessageBox.Show("вы успешно авторизовались!", "оповещение");
+if (user.password == "new_password")
+{
+    new ChangePassword(user).Show();
+}
+
 // Обновляем дату входа
 user.enter_date = DateTime.Now;
 usersTableAdapter.Update(user);
@@ -134,6 +142,53 @@ private int _userRole;
                 }
             }
 ```
+
+## <a id="title2">Форма ChangePassword</a>
+```csharp
+public partial class ChangePassword : Form
+    {
+        private readonly HotelDataSet.usersRow _user;
+        private readonly usersTableAdapter _usersTableAdapter;
+
+        public ChangePassword(HotelDataSet.usersRow user)
+        {
+            InitializeComponent();
+            _user = user;
+            _usersTableAdapter = new usersTableAdapter();
+
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+            string currentPassword = textBox1.Text.Trim();
+            string newPassword = textBox2.Text.Trim();
+            string newPassword2 = textBox3.Text.Trim();
+            if (currentPassword == null || newPassword == null || newPassword2==null)
+            {
+                MessageBox.Show("Заполните все поля!", "ошибка");
+                return;
+            }
+            if (currentPassword != _user.password) 
+            {
+                MessageBox.Show("неверный текущий пароль!", "ошибка");
+                return;
+            }
+            if (newPassword != newPassword2) 
+            {
+                MessageBox.Show("новый пароль не совпадает с подтверждением!", "ошибка");
+                return;
+            }
+            _user.password = newPassword2;
+            _usersTableAdapter.Update(_user);
+            MessageBox.Show("пароль успешно изменен!", "оповещение");
+            this.Hide();
+
+
+        }
+    }
+```
+
+
 ### Советы для запоминания:
 1. **Порядок проверок**:
    - Пустые поля → Поиск пользователя → Статус блокировки → Дата последнего входа → Пароль → Успешная авторизация
@@ -165,7 +220,7 @@ private int _userRole;
 5. Добавить обработчик `guestLabel_Click` для входа как гость
 6. Не забыть сброс `error_counter` при необходимости (например, в `Auth_Load`)
 
-## <a id="title2">Форма пользователя (н-р Admin)</a>
+## <a id="title3">Форма пользователя (н-р Admin)</a>
 
 ### Гайд для запоминания кода (пошагово):
 1. Структура формы:
@@ -230,7 +285,7 @@ private void НазваниеПунктаМеню_Click(object sender, EventArgs
 ```
 4. Привязать обработчик к пункту меню (через свойства в дизайнере)
 
-## <a id="title3">UserControl</a>
+## <a id="title4">UserControl</a>
 
 ### Гайд для запоминания кода (пошагово):
 
@@ -370,7 +425,7 @@ if (dataSet1.HasChanges())
 
 - Обработку ошибок
 
-## <a id="title4">Руководство пользователя</a>
+## <a id="title5">Руководство пользователя</a>
 
 ### Структура руководства
 **Введение**
