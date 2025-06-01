@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using hotel_pattern.HotelDataSetTableAdapters;
 using hotel_pattern.Forms;
 
 namespace hotel_pattern
@@ -20,8 +19,6 @@ namespace hotel_pattern
             InitializeComponent();
             string login = loginTextBox.Text.Trim();
             string password = passwordTextBox.Text.Trim();
-
-            
 
         }
 
